@@ -1,0 +1,8 @@
+<odoo>
+    <record id="project_hicto.expert" model="res.groups">
+        <field name="name">HiCTO / Expert</field>
+    </record>
+    <record id="project_hicto.manager" model="res.groups">
+        <field name="name">HiCTO / Manager</field>
+    </record>
+</odoo>

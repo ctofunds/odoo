@@ -1,0 +1,247 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="project_hicto.project_list">
+      <field name="name">project_hicto.project_list</field>
+      <field name="model">project_hicto.project</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="company_id"/>
+          <field name="contact_id"/>
+          <field name="manager_id"/>
+          <field name="date_start"/>
+          <field name="months"/>
+          <field name="status"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="project_hicto.project_form">
+      <field name="name">project_hicto.project_form</field>
+      <field name="model">project_hicto.project</field>
+      <field name="arch" type="xml">
+          <form>
+              <sheet>
+                  <group>
+                      <field name="name" />
+                      <field name="company_id" />
+                      <field name="contact_id" />
+                      <field name="manager_id" />
+                      <field name="date_start" />
+                      <field name="months" />
+                  </group>
+                  <notebook>
+                      <page string="备注">
+                          <field name="desc"/>
+                      </page>
+                      <page string="服务记录">
+                          <field name="activity_ids"/>
+                      </page>
+                      <page string="项目参与者">
+                          <field name="expert_ids"/>
+                      </page>
+                  </notebook>
+              </sheet>
+          </form>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="project_hicto.timesheet_form">
+      <field name="name">project_hicto.timesheet_form</field>
+      <field name="model">project_hicto.timesheet</field>
+      <field name="arch" type="xml">
+        <form>
+            <group>
+                <field name="expert_id"/>
+                <field name="work_hour"/>
+                <field name="desc"/>
+            </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_hicto.timesheet_list">
+      <field name="name">project_hicto.timesheet_list</field>
+      <field name="model">project_hicto.timesheet</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="expert_id"/>
+          <field name="work_hour"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="project_hicto.activity_search">
+      <field name="name">project_hicto.activity_search</field>
+      <field name="model">project_hicto.activity</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="expert_id"/>
+          <field name="timesheet_ids" />
+          <filter string="我参与的记录" name="only_my" domain="['|' ,('expert_id', '=', uid), ('timesheet_ids.expert_id', '=', uid)]"/>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_hicto.activity_list">
+      <field name="name">project_hicto.activity_list</field>
+      <field name="model">project_hicto.activity</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="project_id"/>
+          <field name="service_way"/>
+          <field name="expert_id"/>
+          <field name="activity_start"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="project_hicto.activity_form">
+        <field name="name">project_hicto.activity_form</field>
+        <field name="model">project_hicto.activity</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="project_id"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="service_item" context="{'form_view_ref':'project_hicto.product_form'}"/>
+                        <field name="service_way"/>
+                        <field name="expert_id"/>
+                        <field name="activity_start"/>
+                    </group>
+                    <notebook>
+                        <page string="服务详细描述">
+                            <field name="desc"/>
+                        </page>
+                        <page string="客户参与人员">
+                            <field name="participants"/>
+                        </page>
+                        <page string="工时">
+                            <field name="timesheet_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="project_hicto.project_search">
+      <field name="name">project_hicto.project_search</field>
+      <field name="model">project_hicto.project</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="manager_id"/>
+          <field name="expert_ids"/>
+          <filter string="我参与的项目" name="only_my" domain="['|', ('manager_id', '=', uid), ('expert_ids', 'in', uid)]"/>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_hicto.product_list">
+        <field name="name">project_hicto.product_list</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="categ_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_hicto.product_form">
+        <field name="name">project_hicto.product_form</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type" invisible="1"/>
+                        <field name="categ_id"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="project_hicto.project_action_window">
+      <field name="name">项目</field>
+      <field name="res_model">project_hicto.project</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'search_default_only_my': 1}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="project_hicto.activity_action_window">
+      <field name="name">服务记录</field>
+      <field name="res_model">project_hicto.activity</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'search_default_only_my': 1}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="project_hicto.product_action_window">
+      <field name="name">服务项</field>
+      <field name="res_model">product.product</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'default_type': 'service'}</field>
+    </record>
+    <record model="ir.actions.act_window.view" id="project_hicto.product_action_window_list">
+        <field eval="1" name="sequence"/>
+        <field name="act_window_id" ref="project_hicto.product_action_window"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="project_hicto.product_list"/>
+    </record>
+    <record model="ir.actions.act_window.view" id="project_hicto.product_action_window_form">
+        <field eval="2" name="sequence"/>
+        <field name="act_window_id" ref="project_hicto.product_action_window"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="project_hicto.product_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="project_hicto.product_category_action_window">
+      <field name="name">服务分类</field>
+      <field name="res_model">product.category</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="project_hicto.action_server">
+      <field name="name">project_hicto server</field>
+      <field name="model_id" ref="model_project_hicto_project_hicto"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <menuitem name="HiCTO" id="project_hicto.menu_root"/>
+    <!-- menu categories -->
+    <menuitem name="项目" id="project_hicto.project" parent="project_hicto.menu_root"
+        action="project_hicto.project_action_window"
+        />
+    <!--
+    <menuitem name="Menu 2" id="project_hicto.menu_2" parent="project_hicto.menu_root"/>
+    -->
+    <!-- actions -->
+    <menuitem name="服务记录" id="project_hicto.activity" parent="project_hicto.menu_root"
+        action="project_hicto.activity_action_window"
+              />
+    <menuitem name="服务项" id="project_hicto.product" parent="project_hicto.menu_root"
+        action="project_hicto.product_action_window"
+              />
+    <menuitem name="服务分类" id="project_hicto.product_category" parent="project_hicto.menu_root"
+        action="project_hicto.product_category_action_window"
+              />
+
+    <!--
+    <menuitem name="Server to list" id="project_hicto" parent="project_hicto.menu_2"
+              action="project_hicto.action_server"/>
+              -->
+  </data>
+</odoo>
