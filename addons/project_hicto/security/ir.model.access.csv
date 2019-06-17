@@ -1,7 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_project_hicto_project,hicto expert,model_project_hicto_project,project_hicto.expert,1,1,1,1
-manage_project_hicto_project,hicto manager,model_project_hicto_project,project_hicto.manager,1,1,1,1
-expert_manage_project_hicto_activity,hicto expert,model_project_hicto_activity,project_hicto.expert,1,1,1,1
-manager_manage_project_hicto_activity,hicto manager,model_project_hicto_activity,project_hicto.manager,1,1,1,1
-expert_manage_project_hicto_timesheet,hicto expert,model_project_hicto_timesheet,project_hicto.expert,1,1,1,1
-manager_manage_project_hicto_timesheet,hicto manager,model_project_hicto_timesheet,project_hicto.manager,1,1,1,1
+manage_project_hicto_project,hicto expert,model_project_hicto_project,project_hicto.expert,1,1,1,1
+manage_project_hicto_activity,hicto expert,model_project_hicto_activity,project_hicto.expert,1,1,1,1
+manage_project_hicto_timesheet,hicto expert,model_project_hicto_timesheet,project_hicto.expert,1,1,1,1
+manage_product_product,hicto expert,product.model_product_product,project_hicto.expert,1,1,1,1
+manage_product_category,hicto expert,product.model_product_category,project_hicto.expert,1,1,1,1
