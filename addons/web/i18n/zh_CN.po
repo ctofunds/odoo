@@ -1338,12 +1338,12 @@ msgstr "编辑记录"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login
 msgid "Email"
-msgstr "EMail"
+msgstr "邮箱"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_standard
 msgid "Email:"
-msgstr "EMail："
+msgstr "邮箱："
 
 #. module: web
 #. openerp-web
