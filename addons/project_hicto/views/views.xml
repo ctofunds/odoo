@@ -55,7 +55,7 @@
                           <field name="activity_ids"/>
                       </page>
                       <page string="项目参与者">
-                          <field name="expert_ids"/>
+                          <field name="expert_ids" widget="many2many_tags"/>
                       </page>
                   </notebook>
               </sheet>
